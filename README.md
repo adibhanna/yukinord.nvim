@@ -9,7 +9,7 @@ Neovim color scheme based on the VSCode theme inspired by [Nord](https://marketp
 #### Packer
 ```lua
 use {
-  'yukina3230/yukinord',
+  'adibhanna/yukinord.nvim',
   config = function()
     vim.cmd('colorscheme yukinord')
   end
@@ -19,16 +19,32 @@ use {
 #### Lazy.nvim
 ```lua
 {
-  'yukina3230/yukinord',
+  'adibhanna/yukinord.nvim',
+  lazy = false,
+  priority = 1000,
   config = function()
-    vim.cmd('colorscheme yukinord')
+    -- Ensure the colorscheme is available before loading
+    vim.defer_fn(function()
+      vim.cmd('colorscheme yukinord')
+    end, 0)
   end
 }
 ```
 
+Or alternatively, if you prefer to set it manually after installation:
+```lua
+{
+  'adibhanna/yukinord.nvim',
+  lazy = false,
+  priority = 1000,
+}
+-- Then in your init.lua, add:
+vim.cmd('colorscheme yukinord')
+```
+
 #### vim-plug
 ```vim
-Plug 'yukina3230/yukinord'
+Plug 'adibhanna/yukinord.nvim'
 colorscheme yukinord
 ```
 
@@ -89,4 +105,18 @@ Add this to your config if not already set:
 ```lua
 vim.o.termguicolors = true
 ```
+
+## Troubleshooting
+
+If you get an error like `Cannot find color scheme 'yukinord'`:
+
+1. **For lazy.nvim**: Make sure you have `lazy = false` and `priority = 1000` in your plugin configuration (as shown above). This ensures the colorscheme loads immediately.
+
+2. **Verify installation**: After installing, restart Neovim completely. The colorscheme should be available.
+
+3. **Manual check**: You can verify the colorscheme is installed by running:
+   ```lua
+   :lua print(vim.fn.globpath(vim.fn.stdpath('data') .. '/lazy/yukinord.nvim', 'colors/yukinord.lua'))
+   ```
+   This should print the path to the colorscheme file.
 
