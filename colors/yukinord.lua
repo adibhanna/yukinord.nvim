@@ -5,7 +5,7 @@
 -- Color palette
 local colors = {
   -- Base colors
-  bg0 = "#1d2129", -- editor.background
+  bg0 = "#1D2129", -- editor.background (VSCode: #1D2129)
   bg1 = "#14171d", -- panel.background, terminal.background
   bg2 = "#292e39", -- dropdown.background, editorHoverWidget.background
   bg3 = "#2e3440", -- commandCenter.activeBackground
@@ -16,7 +16,7 @@ local colors = {
   fg0 = "#eceff4", -- editorCursor.foreground, active foreground
   fg1 = "#e5e9f0", -- terminal.ansiWhite
   fg2 = "#d8dee9", -- editor.foreground, default foreground
-  fg3 = "#78849b", -- editorCodeLens.foreground
+  fg3 = "#8d929c", -- comments color
   fg4 = "#616e88", -- editorLineNumber.foreground
 
   -- Border colors
@@ -100,10 +100,10 @@ hl("Search", { fg = colors.orange, bg = colors.orange, blend = 80, underline = t
 hl("IncSearch", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
 hl("CurSearch", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
 
--- Visual selection
-hl("Visual", { bg = colors.blue_bright, blend = 40 })
-hl("VisualNOS", { bg = colors.blue_bright, blend = 60 })
-hl("VisualInDiff", { bg = colors.blue_bright, blend = 40 })
+-- Visual selection (VSCode: #445B77)
+hl("Visual", { bg = "#445B77" })
+hl("VisualNOS", { bg = "#445B77", blend = 20 })
+hl("VisualInDiff", { bg = "#445B77" })
 
 -- Messages
 hl("ErrorMsg", { fg = colors.red, bold = true })
@@ -516,20 +516,20 @@ hl("LazyReasonStart", { fg = colors.green, bg = colors.bg0 })
 hl("LazyReasonRequire", { fg = colors.blue, bg = colors.bg0 })
 
 -- Snacks.nvim highlights
--- Picker (Telescope-like interface) - file tree/explorer uses darker background
-hl("SnacksPickerNormal", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksPickerBorder", { fg = colors.border, bg = colors.bg1 })
-hl("SnacksPickerTitle", { fg = colors.cyan, bg = colors.bg1, bold = true })
-hl("SnacksPickerPrompt", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksPickerPromptBorder", { fg = colors.border, bg = colors.bg1 })
-hl("SnacksPickerResults", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksPickerResultsBorder", { fg = colors.border, bg = colors.bg1 })
+-- Picker (Telescope-like interface)
+hl("SnacksPickerNormal", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksPickerBorder", { fg = colors.border, bg = colors.bg0 })
+hl("SnacksPickerTitle", { fg = colors.cyan, bg = colors.bg0, bold = true })
+hl("SnacksPickerPrompt", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksPickerPromptBorder", { fg = colors.border, bg = colors.bg0 })
+hl("SnacksPickerResults", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksPickerResultsBorder", { fg = colors.border, bg = colors.bg0 })
 hl("SnacksPickerPreview", { fg = colors.fg2, bg = colors.bg2 })
 hl("SnacksPickerPreviewBorder", { fg = colors.border, bg = colors.bg2 })
 hl("SnacksPickerSelection", { fg = colors.cyan, bg = colors.bg4 })
 hl("SnacksPickerSelectionCaret", { fg = colors.cyan })
 hl("SnacksPickerMatching", { fg = colors.cyan })
-hl("SnacksPickerCounter", { fg = colors.fg3, bg = colors.bg1 })
+hl("SnacksPickerCounter", { fg = colors.fg3, bg = colors.bg0 })
 
 -- Notifier
 hl("SnacksNotifierNormal", { fg = colors.fg2, bg = colors.bg2 })
@@ -575,10 +575,10 @@ hl("SnacksDashboardDesc", { fg = colors.fg2, bg = colors.bg0 })
 hl("SnacksDashboardIcon", { fg = colors.blue, bg = colors.bg0 })
 hl("SnacksDashboardFooter", { fg = colors.fg3, bg = colors.bg0 })
 
--- Win (floating windows) - file explorer might use this
-hl("SnacksWinNormal", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksWinBorder", { fg = colors.border, bg = colors.bg1 })
-hl("SnacksWinTitle", { fg = colors.cyan, bg = colors.bg1, bold = true })
+-- Win (floating windows)
+hl("SnacksWinNormal", { fg = colors.fg2, bg = colors.bg2 })
+hl("SnacksWinBorder", { fg = colors.border, bg = colors.bg2 })
+hl("SnacksWinTitle", { fg = colors.cyan, bg = colors.bg2, bold = true })
 
 -- Debug
 hl("SnacksDebugNormal", { fg = colors.fg2, bg = colors.bg0 })
@@ -598,32 +598,17 @@ hl("SnacksDimBuffer", { fg = colors.fg3, bg = colors.bg0 })
 hl("SnacksWordsMatch", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, underline = true })
 hl("SnacksWordsCurrent", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
 
--- Common snack components - file explorer might use these
-hl("SnacksNormal", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksBorder", { fg = colors.border, bg = colors.bg1 })
+-- Common snack components
+hl("SnacksNormal", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksBorder", { fg = colors.border, bg = colors.bg0 })
 hl("SnacksFloatBorder", { fg = colors.border, bg = colors.bg2 })
-hl("SnacksTitle", { fg = colors.cyan, bg = colors.bg1, bold = true })
-hl("SnacksIcon", { fg = colors.cyan, bg = colors.bg1 })
-hl("SnacksKey", { fg = colors.cyan, bg = colors.bg1 })
-hl("SnacksDesc", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksSeparator", { fg = colors.border, bg = colors.bg1 })
+hl("SnacksTitle", { fg = colors.cyan, bg = colors.bg0, bold = true })
+hl("SnacksIcon", { fg = colors.cyan, bg = colors.bg0 })
+hl("SnacksKey", { fg = colors.cyan, bg = colors.bg0 })
+hl("SnacksDesc", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksSeparator", { fg = colors.border, bg = colors.bg0 })
 hl("SnacksSelected", { fg = colors.cyan, bg = colors.bg4 })
 hl("SnacksMatching", { fg = colors.cyan })
-hl("SnacksCounter", { fg = colors.fg3, bg = colors.bg1 })
-hl("SnacksPrompt", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksPromptPrefix", { fg = colors.cyan, bg = colors.bg1 })
-
--- Snacks.nvim file tree/explorer (darker background like VSCode sidebar)
-hl("SnacksTreeNormal", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksTreeNormalNC", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksTreeRoot", { fg = colors.cyan, bg = colors.bg1 })
-hl("SnacksTreeFolder", { fg = colors.blue, bg = colors.bg1 })
-hl("SnacksTreeFolderOpen", { fg = colors.cyan, bg = colors.bg1 })
-hl("SnacksTreeFile", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksTreeSelected", { fg = colors.cyan, bg = colors.bg4 })
-hl("SnacksTreeIndent", { fg = colors.fg4, bg = colors.bg1 })
-hl("SnacksTreeSymlink", { fg = colors.cyan, bg = colors.bg1 })
-hl("SnacksTreeGitDirty", { fg = colors.yellow, bg = colors.bg1 })
-hl("SnacksTreeGitNew", { fg = colors.green, bg = colors.bg1 })
-hl("SnacksTreeGitDeleted", { fg = colors.red, bg = colors.bg1 })
-hl("SnacksTreeBorder", { fg = colors.border, bg = colors.bg1 })
+hl("SnacksCounter", { fg = colors.fg3, bg = colors.bg0 })
+hl("SnacksPrompt", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksPromptPrefix", { fg = colors.cyan, bg = colors.bg0 })
