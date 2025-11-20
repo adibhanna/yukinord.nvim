@@ -2,6 +2,12 @@
 
 Neovim color scheme based on the VSCode theme inspired by [Nord](https://marketplace.visualstudio.com/items?itemName=arcticicestudio.nord-visual-studio-code) and [Nord Deep](https://marketplace.visualstudio.com/items?itemName=marlosirapuan.nord-deep).
 
+## Preview
+
+![Yukinord Preview 1](assets/image1.jpg)
+
+![Yukinord Preview 2](assets/image2.jpg)
+
 ## Installation
 
 ### Using a plugin manager
@@ -71,7 +77,7 @@ colorscheme yukinord
 
 ## Color Palette
 
-- **Background**: `#1d2129` (main), `#14171d` (panels)
+- **Background**: `#1C212A` (main), `#14171d` (panels)
 - **Foreground**: `#d8dee9` (default), `#eceff4` (active)
 - **Cyan**: `#88c0d0` (keywords, accents)
 - **Blue**: `#81a1c1` (info, links)
@@ -80,6 +86,20 @@ colorscheme yukinord
 - **Orange**: `#d08770` (strings)
 - **Red**: `#bf616a` (errors)
 - **Purple**: `#b48ead` (control keywords)
+
+## Ghostty Terminal Theme
+
+A matching Ghostty terminal theme is included in this repository. The theme file `Yukinord` provides a consistent color experience across Neovim and Ghostty terminal.
+
+### Installation
+
+Copy the contents of the `Yukinord` file and save it as a theme file in your Ghostty config themes directory (`~/.config/ghostty/themes/`), then set `theme = <filename>` in your Ghostty config.
+
+The Ghostty theme includes:
+- 16-color ANSI palette matching the Neovim colorscheme
+- Background and foreground colors
+- Cursor and selection colors
+- All colors synchronized with the Neovim theme
 
 ## Requirements
 
@@ -90,18 +110,4 @@ Add this to your config if not already set:
 ```lua
 vim.o.termguicolors = true
 ```
-
-## Troubleshooting
-
-If you get an error like `Cannot find color scheme 'yukinord'`:
-
-1. **For lazy.nvim**: Make sure you have `lazy = false` and `priority = 1000` in your plugin configuration (as shown above). This ensures the colorscheme loads immediately.
-
-2. **Verify installation**: After installing, restart Neovim completely. The colorscheme should be available.
-
-3. **Manual check**: You can verify the colorscheme is installed by running:
-   ```lua
-   :lua print(vim.fn.globpath(vim.fn.stdpath('data') .. '/lazy/yukinord.nvim', 'colors/yukinord.lua'))
-   ```
-   This should print the path to the colorscheme file.
 
