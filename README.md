@@ -11,7 +11,7 @@ Neovim color scheme based on the VSCode theme inspired by [Nord](https://marketp
 use {
   'adibhanna/yukinord.nvim',
   config = function()
-    vim.cmd('colorscheme yukinord')
+    vim.cmd([[colorscheme yukinord]])
   end
 }
 ```
@@ -20,26 +20,11 @@ use {
 ```lua
 {
   'adibhanna/yukinord.nvim',
-  lazy = false,
   priority = 1000,
   config = function()
-    -- Ensure the colorscheme is available before loading
-    vim.defer_fn(function()
-      vim.cmd('colorscheme yukinord')
-    end, 0)
-  end
+    vim.cmd([[colorscheme yukinord]])
+  end,
 }
-```
-
-Or alternatively, if you prefer to set it manually after installation:
-```lua
-{
-  'adibhanna/yukinord.nvim',
-  lazy = false,
-  priority = 1000,
-}
--- Then in your init.lua, add:
-vim.cmd('colorscheme yukinord')
 ```
 
 #### vim-plug

@@ -1,6 +1,4 @@
 -- Yukinord colorscheme plugin entry point
--- This ensures the colorscheme is available when loaded
-
+-- This file ensures the colorscheme is available when the plugin loads
 -- The colorscheme is defined in colors/yukinord.lua
--- This file ensures lazy.nvim recognizes it as a plugin
 
