@@ -5,7 +5,7 @@
 -- Color palette
 local colors = {
   -- Base colors
-  bg0 = "#1D2129", -- editor.background (VSCode: #1D2129)
+  bg0 = "#1C212A", -- editor.background (matching buffer and explorer)
   bg1 = "#14171d", -- panel.background, terminal.background
   bg2 = "#292e39", -- dropdown.background, editorHoverWidget.background
   bg3 = "#2e3440", -- commandCenter.activeBackground
@@ -56,7 +56,7 @@ vim.o.termguicolors = true
 -- Base highlights
 hl("Normal", { fg = colors.fg2, bg = colors.bg0 })
 hl("NormalFloat", { fg = colors.fg2, bg = colors.bg2 })
-hl("NormalNC", { fg = colors.fg2, bg = colors.bg1 }) -- Darker for inactive windows (like file explorer)
+hl("NormalNC", { fg = colors.fg2, bg = colors.bg0 }) -- Same as Normal for consistent background
 hl("EndOfBuffer", { fg = colors.bg0 })
 hl("WinSeparator", { fg = colors.border })
 hl("FloatBorder", { fg = colors.border, bg = colors.bg2 })
