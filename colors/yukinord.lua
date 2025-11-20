@@ -12,6 +12,9 @@ local colors = {
   bg4 = "#434c5e", -- editor.lineHighlightBorder
   bg5 = "#4c566a", -- button.secondaryBackground
 
+  -- Custom colors
+  statusbar_bg = "#2D3441", -- mini.nvim statusline background
+
   -- Foreground colors
   fg0 = "#eceff4", -- editorCursor.foreground, active foreground
   fg1 = "#e5e9f0", -- terminal.ansiWhite
@@ -74,12 +77,11 @@ hl("LineNr", { fg = colors.fg4 })
 hl("LineNrAbove", { fg = colors.fg4 })
 hl("LineNrBelow", { fg = colors.fg4 })
 
--- Status line (matching VSCode: statusBar.background="#1d2129", statusBar.foreground="#d8dee9")
--- Using bg1 for slightly darker background
-hl("StatusLine", { fg = colors.fg2, bg = colors.bg1 })
-hl("StatusLineNC", { fg = colors.fg2, bg = colors.bg1 })
-hl("StatusLineTerm", { fg = colors.fg2, bg = colors.bg1 })
-hl("StatusLineTermNC", { fg = colors.fg2, bg = colors.bg1 })
+-- Status line (using custom statusbar_bg color)
+hl("StatusLine", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("StatusLineNC", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("StatusLineTerm", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("StatusLineTermNC", { fg = colors.fg2, bg = colors.statusbar_bg })
 
 -- Tab line
 hl("TabLine", { fg = colors.fg2, bg = colors.bg1 })
