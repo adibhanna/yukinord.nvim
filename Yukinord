@@ -1,0 +1,33 @@
+# Yukinord - Ghostty Theme
+# Based on the VSCode theme inspired by Nord and Nord Deep
+# Colors match the Neovim theme color palette
+
+# 16-color palette (standard ANSI colors)
+palette = 0=#1c212a
+palette = 1=#bf616a
+palette = 2=#a3be8c
+palette = 3=#ebcb8b
+palette = 4=#81a1c1
+palette = 5=#b48ead
+palette = 6=#88c0d0
+palette = 7=#e5e9f0
+palette = 8=#4c566a
+palette = 9=#bf616a
+palette = 10=#a3be8c
+palette = 11=#ebcb8b
+palette = 12=#81a1c1
+palette = 13=#b48ead
+palette = 14=#8fbcbb
+palette = 15=#eceff4
+
+# Background and foreground
+background = #1c212a
+foreground = #d8dee9
+
+# Cursor colors
+cursor-color = #eceff4
+cursor-text = #1c212a
+
+# Selection colors
+selection-background = #5e81ac
+selection-foreground = #d8dee9
