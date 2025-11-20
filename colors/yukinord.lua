@@ -5,36 +5,36 @@
 -- Color palette
 local colors = {
   -- Base colors
-  bg0 = "#1d2129",      -- editor.background
-  bg1 = "#14171d",      -- panel.background, terminal.background
-  bg2 = "#292e39",      -- dropdown.background, editorHoverWidget.background
-  bg3 = "#2e3440",      -- commandCenter.activeBackground
-  bg4 = "#434c5e",      -- editor.lineHighlightBorder
-  bg5 = "#4c566a",      -- button.secondaryBackground
-  
+  bg0 = "#1d2129", -- editor.background
+  bg1 = "#14171d", -- panel.background, terminal.background
+  bg2 = "#292e39", -- dropdown.background, editorHoverWidget.background
+  bg3 = "#2e3440", -- commandCenter.activeBackground
+  bg4 = "#434c5e", -- editor.lineHighlightBorder
+  bg5 = "#4c566a", -- button.secondaryBackground
+
   -- Foreground colors
-  fg0 = "#eceff4",      -- editorCursor.foreground, active foreground
-  fg1 = "#e5e9f0",      -- terminal.ansiWhite
-  fg2 = "#d8dee9",      -- editor.foreground, default foreground
-  fg3 = "#78849b",      -- editorCodeLens.foreground
-  fg4 = "#616e88",      -- editorLineNumber.foreground
-  
+  fg0 = "#eceff4", -- editorCursor.foreground, active foreground
+  fg1 = "#e5e9f0", -- terminal.ansiWhite
+  fg2 = "#d8dee9", -- editor.foreground, default foreground
+  fg3 = "#78849b", -- editorCodeLens.foreground
+  fg4 = "#616e88", -- editorLineNumber.foreground
+
   -- Border colors
-  border = "#3b4252",   -- activityBar.border, editorGroup.border
-  
+  border = "#3b4252", -- activityBar.border, editorGroup.border
+
   -- Accent colors
-  cyan = "#88c0d0",     -- keywords, activityBar.activeBorder
-  blue = "#81a1c1",     -- info, charts.blue
+  cyan = "#88c0d0",        -- keywords, activityBar.activeBorder
+  blue = "#81a1c1",        -- info, charts.blue
   blue_bright = "#5e81ac", -- selection background
-  green = "#a3be8c",    -- types, classes, charts.green
-  yellow = "#ebcb8b",   -- numbers, functions, warnings, charts.yellow
-  orange = "#d08770",   -- strings, charts.orange
-  red = "#bf616a",      -- errors, charts.red
-  purple = "#b48ead",   -- keyword.control, charts.purple
-  teal = "#8fbcbb",     -- debugConsole.sourceForeground
-  
+  green = "#a3be8c",       -- types, classes, charts.green
+  yellow = "#ebcb8b",      -- numbers, functions, warnings, charts.yellow
+  orange = "#d08770",      -- strings, charts.orange
+  red = "#bf616a",         -- errors, charts.red
+  purple = "#b48ead",      -- keyword.control, charts.purple
+  teal = "#8fbcbb",        -- debugConsole.sourceForeground
+
   -- Special colors
-  gold = "#ffd700",     -- editorLightBulb.foreground
+  gold = "#ffd700", -- editorLightBulb.foreground
 }
 
 -- Helper function to set highlight groups
@@ -74,7 +74,7 @@ hl("LineNr", { fg = colors.fg4 })
 hl("LineNrAbove", { fg = colors.fg4 })
 hl("LineNrBelow", { fg = colors.fg4 })
 
--- Status line
+-- Status line (matching VSCode: statusBar.background="#1d2129", statusBar.foreground="#d8dee9")
 hl("StatusLine", { fg = colors.fg2, bg = colors.bg0 })
 hl("StatusLineNC", { fg = colors.fg2, bg = colors.bg0 })
 hl("StatusLineTerm", { fg = colors.fg2, bg = colors.bg0 })
@@ -95,14 +95,14 @@ hl("Folded", { fg = colors.fg3, bg = colors.bg0, italic = true })
 hl("FoldColumn", { fg = colors.fg4, bg = colors.bg0 })
 
 -- Search
-hl("Search", { fg = colors.orange, bg = colors.orange .. "33", underline = true })
-hl("IncSearch", { fg = colors.orange, bg = colors.orange .. "33", underline = true })
-hl("CurSearch", { fg = colors.orange, bg = colors.orange .. "33", underline = true })
+hl("Search", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
+hl("IncSearch", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
+hl("CurSearch", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
 
 -- Visual selection
-hl("Visual", { bg = colors.blue_bright .. "99" })
-hl("VisualNOS", { bg = colors.blue_bright .. "66" })
-hl("VisualInDiff", { bg = colors.blue_bright .. "99" })
+hl("Visual", { bg = colors.blue_bright, blend = 40 })
+hl("VisualNOS", { bg = colors.blue_bright, blend = 60 })
+hl("VisualInDiff", { bg = colors.blue_bright, blend = 40 })
 
 -- Messages
 hl("ErrorMsg", { fg = colors.red, bold = true })
@@ -119,10 +119,10 @@ hl("PmenuThumb", { bg = colors.bg4 })
 hl("WildMenu", { fg = colors.cyan, bg = colors.bg4 })
 
 -- Diff
-hl("DiffAdd", { fg = colors.green, bg = colors.green .. "33" })
-hl("DiffChange", { fg = colors.yellow, bg = colors.yellow .. "33" })
-hl("DiffDelete", { fg = colors.red, bg = colors.red .. "33" })
-hl("DiffText", { fg = colors.fg2, bg = colors.yellow .. "66" })
+hl("DiffAdd", { fg = colors.green, bg = colors.green, blend = 80 })
+hl("DiffChange", { fg = colors.yellow, bg = colors.yellow, blend = 80 })
+hl("DiffDelete", { fg = colors.red, bg = colors.red, blend = 80 })
+hl("DiffText", { fg = colors.fg2, bg = colors.yellow, blend = 60 })
 hl("DiffAdded", { fg = colors.green })
 hl("DiffRemoved", { fg = colors.red })
 hl("DiffFile", { fg = colors.cyan })
@@ -136,7 +136,7 @@ hl("SpellLocal", { fg = colors.blue, undercurl = true, sp = colors.blue })
 hl("SpellRare", { fg = colors.purple, undercurl = true, sp = colors.purple })
 
 -- Syntax highlighting
-hl("Comment", { fg = colors.fg2 .. "99", italic = true })
+hl("Comment", { fg = colors.fg3, italic = true })
 hl("Constant", { fg = colors.yellow })
 hl("String", { fg = colors.orange })
 hl("Character", { fg = colors.yellow })
@@ -265,9 +265,9 @@ hl("@text.diff.add", { link = "DiffAdd" })
 hl("@text.diff.delete", { link = "DiffDelete" })
 
 -- LSP highlights
-hl("LspReferenceText", { bg = colors.blue_bright .. "33" })
-hl("LspReferenceRead", { bg = colors.blue_bright .. "33" })
-hl("LspReferenceWrite", { bg = colors.blue_bright .. "33" })
+hl("LspReferenceText", { bg = colors.blue_bright, blend = 80 })
+hl("LspReferenceRead", { bg = colors.blue_bright, blend = 80 })
+hl("LspReferenceWrite", { bg = colors.blue_bright, blend = 80 })
 
 hl("DiagnosticError", { fg = colors.red })
 hl("DiagnosticWarn", { fg = colors.yellow })
@@ -278,10 +278,10 @@ hl("DiagnosticUnderlineWarn", { undercurl = true, sp = colors.yellow })
 hl("DiagnosticUnderlineInfo", { undercurl = true, sp = colors.blue })
 hl("DiagnosticUnderlineHint", { undercurl = true, sp = colors.yellow })
 
-hl("DiagnosticVirtualTextError", { fg = colors.red, bg = colors.red .. "1a" })
-hl("DiagnosticVirtualTextWarn", { fg = colors.yellow, bg = colors.yellow .. "1a" })
-hl("DiagnosticVirtualTextInfo", { fg = colors.blue, bg = colors.blue .. "1a" })
-hl("DiagnosticVirtualTextHint", { fg = colors.yellow, bg = colors.yellow .. "1a" })
+hl("DiagnosticVirtualTextError", { fg = colors.red, bg = colors.red, blend = 90 })
+hl("DiagnosticVirtualTextWarn", { fg = colors.yellow, bg = colors.yellow, blend = 90 })
+hl("DiagnosticVirtualTextInfo", { fg = colors.blue, bg = colors.blue, blend = 90 })
+hl("DiagnosticVirtualTextHint", { fg = colors.yellow, bg = colors.yellow, blend = 90 })
 
 hl("DiagnosticSignError", { fg = colors.red })
 hl("DiagnosticSignWarn", { fg = colors.yellow })
@@ -320,14 +320,14 @@ hl("GitSignsDelete", { fg = colors.red })
 hl("GitSignsAddNr", { fg = colors.green })
 hl("GitSignsChangeNr", { fg = colors.yellow })
 hl("GitSignsDeleteNr", { fg = colors.red })
-hl("GitSignsAddLn", { bg = colors.green .. "33" })
-hl("GitSignsChangeLn", { bg = colors.yellow .. "33" })
-hl("GitSignsDeleteLn", { bg = colors.red .. "33" })
+hl("GitSignsAddLn", { bg = colors.green, blend = 80 })
+hl("GitSignsChangeLn", { bg = colors.yellow, blend = 80 })
+hl("GitSignsDeleteLn", { bg = colors.red, blend = 80 })
 
 -- Indent guides
-hl("IndentBlanklineChar", { fg = colors.fg4 .. "4d" })
+hl("IndentBlanklineChar", { fg = colors.fg4, blend = 70 })
 hl("IndentBlanklineContextChar", { fg = colors.fg4 })
-hl("IndentBlanklineSpaceChar", { fg = colors.fg4 .. "4d" })
+hl("IndentBlanklineSpaceChar", { fg = colors.fg4, blend = 70 })
 hl("IndentBlanklineContextSpaceChar", { fg = colors.fg4 })
 
 -- NvimTree
@@ -443,25 +443,28 @@ hl("NoiceCmdlineIcon", { fg = colors.cyan })
 hl("NoiceConfirm", { bg = colors.bg2 })
 hl("NoiceConfirmBorder", { fg = colors.border })
 
--- Mini
-hl("MiniStatuslineModeNormal", { fg = colors.bg0, bg = colors.cyan, bold = true })
-hl("MiniStatuslineModeInsert", { fg = colors.bg0, bg = colors.green, bold = true })
-hl("MiniStatuslineModeVisual", { fg = colors.bg0, bg = colors.purple, bold = true })
-hl("MiniStatuslineModeReplace", { fg = colors.bg0, bg = colors.red, bold = true })
-hl("MiniStatuslineModeCommand", { fg = colors.bg0, bg = colors.yellow, bold = true })
+-- Mini.nvim statusline (single color scheme)
+hl("MiniStatuslineModeNormal", { fg = colors.fg2, bg = colors.bg0 })
+hl("MiniStatuslineModeInsert", { fg = colors.fg2, bg = colors.bg0 })
+hl("MiniStatuslineModeVisual", { fg = colors.fg2, bg = colors.bg0 })
+hl("MiniStatuslineModeReplace", { fg = colors.fg2, bg = colors.bg0 })
+hl("MiniStatuslineModeCommand", { fg = colors.fg2, bg = colors.bg0 })
+hl("MiniStatuslineFilename", { fg = colors.fg2, bg = colors.bg0 })
+hl("MiniStatuslineFileinfo", { fg = colors.fg2, bg = colors.bg0 })
+hl("MiniStatuslineInactive", { fg = colors.fg2, bg = colors.bg0 })
 
 -- Winbar
 hl("WinBar", { fg = colors.fg2, bg = colors.bg0 })
 hl("WinBarNC", { fg = colors.fg3, bg = colors.bg0 })
 
 -- MatchParen
-hl("MatchParen", { fg = colors.cyan, bg = colors.blue_bright .. "33", bold = true })
+hl("MatchParen", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, bold = true })
 
 -- Whitespace
 hl("Whitespace", { fg = colors.fg4 })
 
 -- Quickfix
-hl("QuickFixLine", { bg = colors.blue_bright .. "33" })
+hl("QuickFixLine", { bg = colors.blue_bright, blend = 80 })
 hl("qfFileName", { fg = colors.cyan })
 hl("qfLineNr", { fg = colors.fg4 })
 hl("qfError", { fg = colors.red })
@@ -565,8 +568,8 @@ hl("SnacksDimNormal", { fg = colors.fg3, bg = colors.bg0 })
 hl("SnacksDimBuffer", { fg = colors.fg3, bg = colors.bg0 })
 
 -- Words (word navigation)
-hl("SnacksWordsMatch", { fg = colors.cyan, bg = colors.blue_bright .. "33", underline = true })
-hl("SnacksWordsCurrent", { fg = colors.orange, bg = colors.orange .. "33", underline = true })
+hl("SnacksWordsMatch", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, underline = true })
+hl("SnacksWordsCurrent", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
 
 -- Common snack components
 hl("SnacksNormal", { fg = colors.fg2, bg = colors.bg0 })
@@ -582,4 +585,3 @@ hl("SnacksMatching", { fg = colors.cyan })
 hl("SnacksCounter", { fg = colors.fg3, bg = colors.bg0 })
 hl("SnacksPrompt", { fg = colors.fg2, bg = colors.bg0 })
 hl("SnacksPromptPrefix", { fg = colors.cyan, bg = colors.bg0 })
-
