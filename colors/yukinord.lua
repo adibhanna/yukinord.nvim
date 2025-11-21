@@ -5,7 +5,7 @@
 -- Color palette
 local colors = {
   -- Base colors
-  bg0 = "#1C212A", -- editor.background (matching buffer and explorer)
+  bg0 = "#1D2129", -- editor.background (matching buffer and explorer)
   bg1 = "#14171d", -- panel.background, terminal.background
   bg2 = "#292e39", -- dropdown.background, editorHoverWidget.background
   bg3 = "#2e3440", -- commandCenter.activeBackground
@@ -98,9 +98,9 @@ hl("Folded", { fg = colors.fg3, bg = colors.bg0, italic = true })
 hl("FoldColumn", { fg = colors.fg4, bg = colors.bg0 })
 
 -- Search
-hl("Search", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
-hl("IncSearch", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
-hl("CurSearch", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
+hl("Search", { fg = colors.bg0, bg = colors.orange, blend = 80 })
+hl("IncSearch", { fg = colors.bg0, bg = colors.yellow, blend = 80 })
+hl("CurSearch", { fg = colors.bg0, bg = colors.orange, blend = 80 })
 
 -- Visual selection (VSCode: #445B77)
 hl("Visual", { bg = "#445B77" })
@@ -526,12 +526,14 @@ hl("SnacksPickerPrompt", { fg = colors.fg2, bg = colors.bg0 })
 hl("SnacksPickerPromptBorder", { fg = colors.border, bg = colors.bg0 })
 hl("SnacksPickerResults", { fg = colors.fg2, bg = colors.bg0 })
 hl("SnacksPickerResultsBorder", { fg = colors.border, bg = colors.bg0 })
-hl("SnacksPickerPreview", { fg = colors.fg2, bg = colors.bg2 })
-hl("SnacksPickerPreviewBorder", { fg = colors.border, bg = colors.bg2 })
+hl("SnacksPickerPreview", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksPickerPreviewBorder", { fg = colors.border, bg = colors.bg0 })
 hl("SnacksPickerSelection", { fg = colors.cyan, bg = colors.bg4 })
 hl("SnacksPickerSelectionCaret", { fg = colors.cyan })
-hl("SnacksPickerMatching", { fg = colors.cyan })
+hl("SnacksPickerMatching", { fg = colors.orange })
 hl("SnacksPickerCounter", { fg = colors.fg3, bg = colors.bg0 })
+-- hl("SnacksPickerSearch", { fg = colors.orange, bg = colors.bg0 })
+hl("SnacksPicker", { fg = colors.fg2, bg = colors.bg0 })
 
 -- Notifier
 hl("SnacksNotifierNormal", { fg = colors.fg2, bg = colors.bg2 })
@@ -610,7 +612,7 @@ hl("SnacksKey", { fg = colors.cyan, bg = colors.bg0 })
 hl("SnacksDesc", { fg = colors.fg2, bg = colors.bg0 })
 hl("SnacksSeparator", { fg = colors.border, bg = colors.bg0 })
 hl("SnacksSelected", { fg = colors.cyan, bg = colors.bg4 })
-hl("SnacksMatching", { fg = colors.cyan })
+hl("SnacksMatching", { fg = colors.orange })
 hl("SnacksCounter", { fg = colors.fg3, bg = colors.bg0 })
 hl("SnacksPrompt", { fg = colors.fg2, bg = colors.bg0 })
 hl("SnacksPromptPrefix", { fg = colors.cyan, bg = colors.bg0 })
