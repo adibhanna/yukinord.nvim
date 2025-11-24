@@ -2,6 +2,24 @@
 -- Based on the VSCode theme inspired by Nord and Nord Deep
 ---@diagnostic disable: undefined-global
 
+-- Load configuration
+local config = require("yukinord").config
+
+-- Transparent background helper
+local function transparent_bg(color)
+  if config.transparent then
+    return "NONE"
+  end
+  return color
+end
+
+local function transparent_sidebar_bg(color)
+  if config.transparent_sidebar or config.transparent then
+    return "NONE"
+  end
+  return color
+end
+
 -- Color palette
 local colors = {
   -- Base colors
@@ -57,18 +75,18 @@ vim.o.background = "dark"
 vim.o.termguicolors = true
 
 -- Base highlights
-hl("Normal", { fg = colors.fg2, bg = colors.bg0 })
+hl("Normal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
 hl("NormalFloat", { fg = colors.fg2, bg = colors.bg2 })
-hl("NormalNC", { fg = colors.fg2, bg = colors.bg0 }) -- Same as Normal for consistent background
-hl("EndOfBuffer", { fg = colors.bg0 })
+hl("NormalNC", { fg = colors.fg2, bg = transparent_bg(colors.bg0) }) -- Same as Normal for consistent background
+hl("EndOfBuffer", { fg = transparent_bg(colors.bg0) })
 hl("WinSeparator", { fg = colors.border })
 hl("FloatBorder", { fg = colors.border, bg = colors.bg2 })
 
 -- Cursor
 hl("Cursor", { fg = colors.bg0, bg = colors.fg0 })
-hl("CursorLine", { bg = colors.bg0 })
-hl("CursorLineNr", { fg = colors.fg0, bg = colors.bg0, bold = true })
-hl("CursorColumn", { bg = colors.bg0 })
+hl("CursorLine", { bg = transparent_bg(colors.bg0) })
+hl("CursorLineNr", { fg = colors.fg0, bg = transparent_bg(colors.bg0), bold = true })
+hl("CursorColumn", { bg = transparent_bg(colors.bg0) })
 hl("TermCursor", { fg = colors.bg0, bg = colors.fg0 })
 hl("TermCursorNC", { fg = colors.bg0, bg = colors.fg2 })
 
@@ -90,12 +108,12 @@ hl("TabLineSel", { fg = colors.fg0, bg = colors.bg0, bold = true })
 hl("TabLineSelModified", { fg = colors.cyan, bg = colors.bg0 })
 
 -- Sign column
-hl("SignColumn", { bg = colors.bg0 })
-hl("FoldColumn", { fg = colors.fg4, bg = colors.bg0 })
+hl("SignColumn", { bg = transparent_bg(colors.bg0) })
+hl("FoldColumn", { fg = colors.fg4, bg = transparent_bg(colors.bg0) })
 
 -- Folding
-hl("Folded", { fg = colors.fg3, bg = colors.bg0, italic = true })
-hl("FoldColumn", { fg = colors.fg4, bg = colors.bg0 })
+hl("Folded", { fg = colors.fg3, bg = transparent_bg(colors.bg0), italic = true })
+hl("FoldColumn", { fg = colors.fg4, bg = transparent_bg(colors.bg0) })
 
 -- Search
 hl("Search", { fg = colors.bg0, bg = colors.orange, blend = 80 })
@@ -334,8 +352,8 @@ hl("IndentBlanklineSpaceChar", { fg = colors.fg4, blend = 70 })
 hl("IndentBlanklineContextSpaceChar", { fg = colors.fg4 })
 
 -- NvimTree
-hl("NvimTreeNormal", { fg = colors.fg2, bg = colors.bg1 })
-hl("NvimTreeNormalNC", { fg = colors.fg2, bg = colors.bg1 })
+hl("NvimTreeNormal", { fg = colors.fg2, bg = transparent_sidebar_bg(colors.bg1) })
+hl("NvimTreeNormalNC", { fg = colors.fg2, bg = transparent_sidebar_bg(colors.bg1) })
 hl("NvimTreeRootFolder", { fg = colors.cyan })
 hl("NvimTreeGitDirty", { fg = colors.yellow })
 hl("NvimTreeGitNew", { fg = colors.green })
@@ -459,8 +477,8 @@ hl("MiniStatuslineFileinfo", { link = "StatusLine" })
 hl("MiniStatuslineInactive", { link = "StatusLine" })
 
 -- Winbar
-hl("WinBar", { fg = colors.fg2, bg = colors.bg0 })
-hl("WinBarNC", { fg = colors.fg3, bg = colors.bg0 })
+hl("WinBar", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("WinBarNC", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 
 -- MatchParen
 hl("MatchParen", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, bold = true })
@@ -519,21 +537,21 @@ hl("LazyReasonRequire", { fg = colors.blue, bg = colors.bg0 })
 
 -- Snacks.nvim highlights
 -- Picker (Telescope-like interface)
-hl("SnacksPickerNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksPickerBorder", { fg = colors.border, bg = colors.bg0 })
-hl("SnacksPickerTitle", { fg = colors.cyan, bg = colors.bg0, bold = true })
-hl("SnacksPickerPrompt", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksPickerPromptBorder", { fg = colors.border, bg = colors.bg0 })
-hl("SnacksPickerResults", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksPickerResultsBorder", { fg = colors.border, bg = colors.bg0 })
-hl("SnacksPickerPreview", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksPickerPreviewBorder", { fg = colors.border, bg = colors.bg0 })
+hl("SnacksPickerNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksPickerBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
+hl("SnacksPickerTitle", { fg = colors.cyan, bg = transparent_bg(colors.bg0), bold = true })
+hl("SnacksPickerPrompt", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksPickerPromptBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
+hl("SnacksPickerResults", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksPickerResultsBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
+hl("SnacksPickerPreview", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksPickerPreviewBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
 hl("SnacksPickerSelection", { fg = colors.cyan, bg = colors.bg4 })
 hl("SnacksPickerSelectionCaret", { fg = colors.cyan })
 hl("SnacksPickerMatching", { fg = colors.orange })
-hl("SnacksPickerCounter", { fg = colors.fg3, bg = colors.bg0 })
+hl("SnacksPickerCounter", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 -- hl("SnacksPickerSearch", { fg = colors.orange, bg = colors.bg0 })
-hl("SnacksPicker", { fg = colors.fg2, bg = colors.bg0 })
+hl("SnacksPicker", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
 
 -- Notifier
 hl("SnacksNotifierNormal", { fg = colors.fg2, bg = colors.bg2 })
@@ -553,31 +571,31 @@ hl("SnacksNotifierDEBUGBorder", { fg = colors.fg4, bg = colors.bg2 })
 hl("SnacksNotifierTRACEBorder", { fg = colors.purple, bg = colors.bg2 })
 
 -- Zen mode
-hl("SnacksZenNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksZenBorder", { fg = colors.border, bg = colors.bg0 })
+hl("SnacksZenNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksZenBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
 
 -- Scratch buffer
-hl("SnacksScratchNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksScratchBorder", { fg = colors.border, bg = colors.bg0 })
-hl("SnacksScratchTitle", { fg = colors.cyan, bg = colors.bg0, bold = true })
+hl("SnacksScratchNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksScratchBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
+hl("SnacksScratchTitle", { fg = colors.cyan, bg = transparent_bg(colors.bg0), bold = true })
 
 -- Terminal
-hl("SnacksTerminalNormal", { fg = colors.fg2, bg = colors.bg1 })
-hl("SnacksTerminalBorder", { fg = colors.border, bg = colors.bg1 })
-hl("SnacksTerminalTitle", { fg = colors.cyan, bg = colors.bg1, bold = true })
+hl("SnacksTerminalNormal", { fg = colors.fg2, bg = transparent_sidebar_bg(colors.bg1) })
+hl("SnacksTerminalBorder", { fg = colors.border, bg = transparent_sidebar_bg(colors.bg1) })
+hl("SnacksTerminalTitle", { fg = colors.cyan, bg = transparent_sidebar_bg(colors.bg1), bold = true })
 
 -- Git browse
-hl("SnacksGitBrowseNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksGitBrowseBorder", { fg = colors.border, bg = colors.bg0 })
+hl("SnacksGitBrowseNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksGitBrowseBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
 
 -- Dashboard
-hl("SnacksDashboardNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksDashboardBorder", { fg = colors.border, bg = colors.bg0 })
-hl("SnacksDashboardTitle", { fg = colors.cyan, bg = colors.bg0, bold = true })
-hl("SnacksDashboardKey", { fg = colors.cyan, bg = colors.bg0 })
-hl("SnacksDashboardDesc", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksDashboardIcon", { fg = colors.blue, bg = colors.bg0 })
-hl("SnacksDashboardFooter", { fg = colors.fg3, bg = colors.bg0 })
+hl("SnacksDashboardNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksDashboardBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
+hl("SnacksDashboardTitle", { fg = colors.cyan, bg = transparent_bg(colors.bg0), bold = true })
+hl("SnacksDashboardKey", { fg = colors.cyan, bg = transparent_bg(colors.bg0) })
+hl("SnacksDashboardDesc", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksDashboardIcon", { fg = colors.blue, bg = transparent_bg(colors.bg0) })
+hl("SnacksDashboardFooter", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 
 -- Win (floating windows)
 hl("SnacksWinNormal", { fg = colors.fg2, bg = colors.bg2 })
@@ -585,34 +603,34 @@ hl("SnacksWinBorder", { fg = colors.border, bg = colors.bg2 })
 hl("SnacksWinTitle", { fg = colors.cyan, bg = colors.bg2, bold = true })
 
 -- Debug
-hl("SnacksDebugNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksDebugBorder", { fg = colors.border, bg = colors.bg0 })
-hl("SnacksDebugTitle", { fg = colors.purple, bg = colors.bg0, bold = true })
+hl("SnacksDebugNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksDebugBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
+hl("SnacksDebugTitle", { fg = colors.purple, bg = transparent_bg(colors.bg0), bold = true })
 
 -- Toggle
-hl("SnacksToggleNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksToggleActive", { fg = colors.cyan, bg = colors.bg0, bold = true })
-hl("SnacksToggleInactive", { fg = colors.fg3, bg = colors.bg0 })
+hl("SnacksToggleNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksToggleActive", { fg = colors.cyan, bg = transparent_bg(colors.bg0), bold = true })
+hl("SnacksToggleInactive", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 
 -- Dim
-hl("SnacksDimNormal", { fg = colors.fg3, bg = colors.bg0 })
-hl("SnacksDimBuffer", { fg = colors.fg3, bg = colors.bg0 })
+hl("SnacksDimNormal", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
+hl("SnacksDimBuffer", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 
 -- Words (word navigation)
 hl("SnacksWordsMatch", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, underline = true })
 hl("SnacksWordsCurrent", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
 
 -- Common snack components
-hl("SnacksNormal", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksBorder", { fg = colors.border, bg = colors.bg0 })
+hl("SnacksNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
 hl("SnacksFloatBorder", { fg = colors.border, bg = colors.bg2 })
-hl("SnacksTitle", { fg = colors.cyan, bg = colors.bg0, bold = true })
-hl("SnacksIcon", { fg = colors.cyan, bg = colors.bg0 })
-hl("SnacksKey", { fg = colors.cyan, bg = colors.bg0 })
-hl("SnacksDesc", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksSeparator", { fg = colors.border, bg = colors.bg0 })
+hl("SnacksTitle", { fg = colors.cyan, bg = transparent_bg(colors.bg0), bold = true })
+hl("SnacksIcon", { fg = colors.cyan, bg = transparent_bg(colors.bg0) })
+hl("SnacksKey", { fg = colors.cyan, bg = transparent_bg(colors.bg0) })
+hl("SnacksDesc", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksSeparator", { fg = colors.border, bg = transparent_bg(colors.bg0) })
 hl("SnacksSelected", { fg = colors.cyan, bg = colors.bg4 })
 hl("SnacksMatching", { fg = colors.orange })
-hl("SnacksCounter", { fg = colors.fg3, bg = colors.bg0 })
-hl("SnacksPrompt", { fg = colors.fg2, bg = colors.bg0 })
-hl("SnacksPromptPrefix", { fg = colors.cyan, bg = colors.bg0 })
+hl("SnacksCounter", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
+hl("SnacksPrompt", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
+hl("SnacksPromptPrefix", { fg = colors.cyan, bg = transparent_bg(colors.bg0) })

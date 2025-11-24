@@ -3,10 +3,15 @@
 
 local M = {}
 
+-- Default configuration
+M.config = {
+  transparent = false, -- Enable transparent background
+  transparent_sidebar = false, -- Enable transparent background for sidebars (NvimTree, etc.)
+}
+
 function M.setup(opts)
   opts = opts or {}
-  -- Setup function for future configuration options
-  -- Currently the colorscheme is defined in colors/yukinord.lua
+  M.config = vim.tbl_deep_extend("force", M.config, opts)
 end
 
 return M
