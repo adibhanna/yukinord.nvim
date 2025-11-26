@@ -56,8 +56,31 @@ colorscheme yukinord
    colorscheme yukinord
    ```
 
+## Configuration
+
+Yukinord supports optional configuration via the `setup` function. Call it **before** loading the colorscheme:
+
+```lua
+require("yukinord").setup({
+  transparent = false,         -- Enable transparent background
+  transparent_sidebar = false, -- Enable transparent background for sidebars (NvimTree, terminal, etc.)
+})
+
+vim.cmd([[colorscheme yukinord]])
+```
+
+### Options
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `transparent` | `false` | Makes the main editor background transparent |
+| `transparent_sidebar` | `false` | Makes sidebar backgrounds transparent (NvimTree, Snacks terminal, etc.) |
+
+**Note:** When `transparent` is enabled, `transparent_sidebar` is also automatically enabled.
+
 ## Features
 
+- Transparent background support (configurable)
 - Full support for Treesitter syntax highlighting
 - LSP semantic tokens support
 - Comprehensive highlight groups for popular plugins:
