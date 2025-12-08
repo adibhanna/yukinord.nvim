@@ -56,6 +56,14 @@ local colors = {
 
   -- Special colors
   gold = "#ffd700", -- editorLightBulb.foreground
+
+  -- Diff colors (subtle, VSCode-like backgrounds)
+  diff_add_bg = "#2a3325",      -- subtle green-tinted background for added lines
+  diff_delete_bg = "#362c2e",   -- subtle red-tinted background for deleted lines
+  diff_change_bg = "#2d3340",   -- subtle blue-tinted background for changed lines
+  diff_text_bg = "#3d4a5c",     -- slightly brighter for changed text within line
+  diff_add_char = "#3d4f35",    -- deeper green for inserted characters
+  diff_delete_char = "#4d3538", -- deeper red for deleted characters
 }
 
 -- Helper function to set highlight groups
@@ -76,11 +84,11 @@ vim.o.termguicolors = true
 
 -- Base highlights
 hl("Normal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
-hl("NormalFloat", { fg = colors.fg2, bg = colors.bg2 })
+hl("NormalFloat", { fg = colors.fg2, bg = colors.statusbar_bg })
 hl("NormalNC", { fg = colors.fg2, bg = transparent_bg(colors.bg0) }) -- Same as Normal for consistent background
 hl("EndOfBuffer", { fg = transparent_bg(colors.bg0) })
 hl("WinSeparator", { fg = colors.border })
-hl("FloatBorder", { fg = colors.border, bg = colors.bg2 })
+hl("FloatBorder", { fg = colors.statusbar_bg, bg = colors.statusbar_bg })
 
 -- Cursor
 hl("Cursor", { fg = colors.bg0, bg = colors.fg0 })
@@ -132,18 +140,19 @@ hl("ModeMsg", { fg = colors.fg2 })
 hl("MoreMsg", { fg = colors.cyan })
 hl("Question", { fg = colors.cyan })
 
--- Popup menu
-hl("Pmenu", { fg = colors.fg2, bg = colors.bg0 })
-hl("PmenuSel", { fg = colors.cyan, bg = colors.bg4 })
-hl("PmenuSbar", { bg = colors.bg2 })
+-- Popup menu (completion menu and documentation)
+hl("Pmenu", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("PmenuSel", { fg = colors.fg0, bg = colors.bg4 })
+hl("PmenuSbar", { bg = colors.statusbar_bg })
 hl("PmenuThumb", { bg = colors.bg4 })
+hl("PmenuBorder", { fg = colors.border, bg = colors.statusbar_bg })
 hl("WildMenu", { fg = colors.cyan, bg = colors.bg4 })
 
--- Diff
-hl("DiffAdd", { fg = colors.green, bg = colors.green, blend = 80 })
-hl("DiffChange", { fg = colors.yellow, bg = colors.yellow, blend = 80 })
-hl("DiffDelete", { fg = colors.red, bg = colors.red, blend = 80 })
-hl("DiffText", { fg = colors.fg2, bg = colors.yellow, blend = 60 })
+-- Diff (subtle VSCode-like backgrounds)
+hl("DiffAdd", { bg = colors.diff_add_bg })
+hl("DiffChange", { bg = colors.diff_change_bg })
+hl("DiffDelete", { bg = colors.diff_delete_bg })
+hl("DiffText", { bg = colors.diff_text_bg })
 hl("DiffAdded", { fg = colors.green })
 hl("DiffRemoved", { fg = colors.red })
 hl("DiffFile", { fg = colors.cyan })
@@ -285,10 +294,21 @@ hl("@text.reference", { fg = colors.purple })
 hl("@text.diff.add", { link = "DiffAdd" })
 hl("@text.diff.delete", { link = "DiffDelete" })
 
+-- Markup highlights (for lazy.nvim and other plugins)
+hl("@markup.link", { fg = colors.cyan, underline = true })
+hl("@markup.link.label", { fg = colors.cyan })
+hl("@markup.link.url", { fg = colors.cyan, underline = true })
+hl("@markup.raw", { fg = colors.orange })
+hl("@markup.raw.markdown_inline", { fg = colors.orange })
+hl("@markup.heading", { fg = colors.cyan, bold = true })
+hl("@markup.italic", { italic = true })
+hl("@markup.strong", { bold = true })
+hl("@markup.strikethrough", { strikethrough = true })
+
 -- LSP highlights
-hl("LspReferenceText", { bg = colors.blue_bright, blend = 80 })
-hl("LspReferenceRead", { bg = colors.blue_bright, blend = 80 })
-hl("LspReferenceWrite", { bg = colors.blue_bright, blend = 80 })
+hl("LspReferenceText", { bg = colors.bg4, blend = 50 })
+hl("LspReferenceRead", { bg = colors.bg4, blend = 50 })
+hl("LspReferenceWrite", { bg = colors.bg4, blend = 50 })
 
 hl("DiagnosticError", { fg = colors.red })
 hl("DiagnosticWarn", { fg = colors.yellow })
@@ -312,6 +332,11 @@ hl("DiagnosticSignHint", { fg = colors.yellow })
 hl("LspCodeLens", { fg = colors.fg3 })
 hl("LspCodeLensSeparator", { fg = colors.fg4 })
 
+-- LSP Hover/Documentation
+hl("LspInfoBorder", { fg = colors.statusbar_bg, bg = colors.statusbar_bg })
+hl("LspFloatWinNormal", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("LspFloatWinBorder", { fg = colors.statusbar_bg, bg = colors.statusbar_bg })
+
 -- LSP semantic tokens
 hl("@lsp.type.namespace", { link = "@namespace" })
 hl("@lsp.type.type", { link = "@type" })
@@ -334,16 +359,33 @@ hl("@lsp.type.number", { link = "@number" })
 hl("@lsp.type.regexp", { link = "@string.regex" })
 hl("@lsp.type.operator", { link = "@operator" })
 
--- Git signs
+-- Git signs (gutter signs and line highlights)
 hl("GitSignsAdd", { fg = colors.green })
 hl("GitSignsChange", { fg = colors.yellow })
 hl("GitSignsDelete", { fg = colors.red })
 hl("GitSignsAddNr", { fg = colors.green })
 hl("GitSignsChangeNr", { fg = colors.yellow })
 hl("GitSignsDeleteNr", { fg = colors.red })
-hl("GitSignsAddLn", { bg = colors.green, blend = 80 })
-hl("GitSignsChangeLn", { bg = colors.yellow, blend = 80 })
-hl("GitSignsDeleteLn", { bg = colors.red, blend = 80 })
+hl("GitSignsAddLn", { bg = colors.diff_add_bg })
+hl("GitSignsChangeLn", { bg = colors.diff_change_bg })
+hl("GitSignsDeleteLn", { bg = colors.diff_delete_bg })
+-- GitSigns inline word diff (for deleted/added characters within a line)
+hl("GitSignsAddInline", { bg = colors.diff_add_char })
+hl("GitSignsDeleteInline", { bg = colors.diff_delete_char })
+hl("GitSignsChangeInline", { bg = colors.diff_text_bg })
+-- GitSigns virtual lines for deleted content
+hl("GitSignsDeleteVirtLn", { fg = colors.fg3, bg = colors.diff_delete_bg })
+hl("GitSignsDeleteVirtLnInline", { bg = colors.diff_delete_char })
+-- GitSigns staged changes
+hl("GitSignsStagedAdd", { fg = colors.green })
+hl("GitSignsStagedChange", { fg = colors.yellow })
+hl("GitSignsStagedDelete", { fg = colors.red })
+hl("GitSignsStagedAddNr", { fg = colors.green })
+hl("GitSignsStagedChangeNr", { fg = colors.yellow })
+hl("GitSignsStagedDeleteNr", { fg = colors.red })
+hl("GitSignsStagedAddLn", { bg = colors.diff_add_bg })
+hl("GitSignsStagedChangeLn", { bg = colors.diff_change_bg })
+hl("GitSignsStagedDeleteLn", { bg = colors.diff_delete_bg })
 
 -- Indent guides
 hl("IndentBlanklineChar", { fg = colors.fg4, blend = 70 })
@@ -382,7 +424,8 @@ hl("WhichKey", { fg = colors.cyan })
 hl("WhichKeyGroup", { fg = colors.blue })
 hl("WhichKeySeparator", { fg = colors.fg4 })
 hl("WhichKeyDesc", { fg = colors.fg2 })
-hl("WhichKeyFloat", { bg = colors.bg2 })
+hl("WhichKeyFloat", { bg = colors.bg1 })
+hl("WhichKeyBorder", { fg = colors.border, bg = colors.bg1 })
 
 -- Cmp
 hl("CmpItemAbbr", { fg = colors.fg2 })
@@ -415,6 +458,43 @@ hl("CmpItemKindOperator", { fg = colors.fg2 })
 hl("CmpItemKindReference", { fg = colors.purple })
 hl("CmpItemKindTypeParameter", { fg = colors.green })
 hl("CmpItemKindValue", { fg = colors.fg2 })
+
+-- Cmp documentation window
+hl("CmpDoc", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("CmpDocBorder", { fg = colors.statusbar_bg, bg = colors.statusbar_bg })
+
+-- Blink.cmp (alternative completion plugin)
+hl("BlinkCmpMenu", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("BlinkCmpMenuBorder", { fg = colors.border, bg = colors.statusbar_bg })
+hl("BlinkCmpMenuSelection", { fg = colors.fg0, bg = colors.bg4 })
+hl("BlinkCmpDoc", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("BlinkCmpDocBorder", { fg = colors.border, bg = colors.statusbar_bg })
+hl("BlinkCmpDocSeparator", { fg = colors.border, bg = colors.statusbar_bg })
+hl("BlinkCmpSignatureHelp", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("BlinkCmpSignatureHelpBorder", { fg = colors.border, bg = colors.statusbar_bg })
+hl("BlinkCmpLabel", { fg = colors.fg2 })
+hl("BlinkCmpLabelMatch", { fg = colors.cyan })
+hl("BlinkCmpLabelDeprecated", { fg = colors.fg3, strikethrough = true })
+hl("BlinkCmpKind", { fg = colors.purple })
+hl("BlinkCmpKindFunction", { fg = colors.yellow })
+hl("BlinkCmpKindMethod", { fg = colors.yellow })
+hl("BlinkCmpKindField", { fg = colors.fg2 })
+hl("BlinkCmpKindVariable", { fg = colors.fg2 })
+hl("BlinkCmpKindClass", { fg = colors.green })
+hl("BlinkCmpKindInterface", { fg = colors.green, italic = true })
+hl("BlinkCmpKindModule", { fg = colors.green })
+hl("BlinkCmpKindProperty", { fg = colors.fg2 })
+hl("BlinkCmpKindKeyword", { fg = colors.cyan })
+hl("BlinkCmpKindText", { fg = colors.fg2 })
+hl("BlinkCmpKindSnippet", { fg = colors.orange })
+hl("BlinkCmpKindFile", { fg = colors.blue })
+hl("BlinkCmpKindFolder", { fg = colors.blue })
+hl("BlinkCmpKindEnum", { fg = colors.green })
+hl("BlinkCmpKindEnumMember", { fg = colors.green, bold = true })
+hl("BlinkCmpKindConstant", { fg = colors.cyan })
+hl("BlinkCmpKindStruct", { fg = colors.green })
+hl("BlinkCmpKindTypeParameter", { fg = colors.green })
+hl("BlinkCmpSource", { fg = colors.fg3 })
 
 -- Notify
 hl("NotifyERRORBorder", { fg = colors.red })
@@ -458,11 +538,14 @@ hl("BufferLineSeparatorSelected", { fg = colors.border, bg = colors.bg0 })
 hl("BufferLineSeparatorVisible", { fg = colors.border, bg = colors.bg1 })
 
 -- Noice
-hl("NoiceCmdlinePopup", { bg = colors.bg2 })
-hl("NoiceCmdlinePopupBorder", { fg = colors.border })
+hl("NoiceCmdlinePopup", { bg = colors.bg1 })
+hl("NoiceCmdlinePopupBorder", { fg = colors.border, bg = colors.bg1 })
 hl("NoiceCmdlineIcon", { fg = colors.cyan })
-hl("NoiceConfirm", { bg = colors.bg2 })
-hl("NoiceConfirmBorder", { fg = colors.border })
+hl("NoiceConfirm", { bg = colors.bg1 })
+hl("NoiceConfirmBorder", { fg = colors.border, bg = colors.bg1 })
+hl("NoiceLspProgressTitle", { fg = colors.fg2, bg = colors.bg1 })
+hl("NoicePopup", { fg = colors.fg2, bg = colors.bg1 })
+hl("NoicePopupBorder", { fg = colors.border, bg = colors.bg1 })
 
 -- Mini.nvim statusline (all sections link to StatusLine for consistent single color)
 hl("MiniStatuslineModeNormal", { link = "StatusLine" })
@@ -481,13 +564,13 @@ hl("WinBar", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
 hl("WinBarNC", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 
 -- MatchParen
-hl("MatchParen", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, bold = true })
+hl("MatchParen", { fg = colors.cyan, bg = colors.bg4, bold = true })
 
 -- Whitespace
 hl("Whitespace", { fg = colors.fg4 })
 
 -- Quickfix
-hl("QuickFixLine", { bg = colors.blue_bright, blend = 80 })
+hl("QuickFixLine", { bg = colors.bg4 })
 hl("qfFileName", { fg = colors.cyan })
 hl("qfLineNr", { fg = colors.fg4 })
 hl("qfError", { fg = colors.red })
@@ -511,29 +594,44 @@ hl("SpecialKey", { fg = colors.fg4 })
 -- Title
 hl("Title", { fg = colors.cyan, bold = true })
 
--- Lazy.nvim plugin manager
-hl("LazyNormal", { fg = colors.fg2, bg = colors.bg0 })
+-- Lazy.nvim plugin manager (complete highlight groups from https://lazy.folke.io/configuration/highlights)
+hl("LazyNormal", { fg = colors.fg2, bg = colors.statusbar_bg })
+hl("LazyBackdrop", { bg = colors.statusbar_bg })
+hl("LazyBold", { bold = true })
 hl("LazyButton", { fg = colors.fg2, bg = colors.bg2 })
 hl("LazyButtonActive", { fg = colors.cyan, bg = colors.bg4 })
-hl("LazyH1", { fg = colors.cyan, bg = colors.bg0, bold = true })
-hl("LazyH2", { fg = colors.fg2, bg = colors.bg0 })
-hl("LazyValue", { fg = colors.yellow, bg = colors.bg0 })
-hl("LazyTaskOutput", { fg = colors.fg2, bg = colors.bg0 })
-hl("LazyTaskError", { fg = colors.red, bg = colors.bg0 })
-hl("LazyTaskSuccess", { fg = colors.green, bg = colors.bg0 })
-hl("LazySpecial", { fg = colors.cyan, bg = colors.bg0 })
-hl("LazyProgressDone", { fg = colors.cyan, bg = colors.bg0 })
-hl("LazyProgressTodo", { fg = colors.fg4, bg = colors.bg0 })
-hl("LazyReasonCmd", { fg = colors.orange, bg = colors.bg0 })
-hl("LazyReasonEvent", { fg = colors.yellow, bg = colors.bg0 })
-hl("LazyReasonFt", { fg = colors.blue, bg = colors.bg0 })
-hl("LazyReasonImport", { fg = colors.green, bg = colors.bg0 })
-hl("LazyReasonKeys", { fg = colors.purple, bg = colors.bg0 })
-hl("LazyReasonPlugin", { fg = colors.cyan, bg = colors.bg0 })
-hl("LazyReasonRuntime", { fg = colors.teal, bg = colors.bg0 })
-hl("LazyReasonSource", { fg = colors.orange, bg = colors.bg0 })
-hl("LazyReasonStart", { fg = colors.green, bg = colors.bg0 })
-hl("LazyReasonRequire", { fg = colors.blue, bg = colors.bg0 })
+hl("LazyComment", { fg = colors.fg3, italic = true })
+hl("LazyCommit", { fg = colors.cyan })
+hl("LazyCommitIssue", { fg = colors.yellow })
+hl("LazyCommitScope", { fg = colors.fg3, italic = true })
+hl("LazyCommitType", { fg = colors.cyan })
+hl("LazyDimmed", { fg = colors.fg4 })
+hl("LazyDir", { fg = colors.cyan, underline = true })
+hl("LazyError", { fg = colors.red })
+hl("LazyH1", { fg = colors.bg0, bg = colors.cyan, bold = true })
+hl("LazyH2", { fg = colors.cyan, bold = true })
+hl("LazyInfo", { fg = colors.blue })
+hl("LazyItalic", { italic = true })
+hl("LazyLocal", { fg = colors.cyan })
+hl("LazyNoCond", { fg = colors.yellow })
+hl("LazyProgressDone", { fg = colors.cyan })
+hl("LazyProgressTodo", { fg = colors.fg4 })
+hl("LazyProp", { fg = colors.fg4 })
+hl("LazyReasonCmd", { fg = colors.orange })
+hl("LazyReasonEvent", { fg = colors.yellow })
+hl("LazyReasonFt", { fg = colors.blue })
+hl("LazyReasonImport", { fg = colors.green })
+hl("LazyReasonKeys", { fg = colors.purple })
+hl("LazyReasonPlugin", { fg = colors.cyan })
+hl("LazyReasonRequire", { fg = colors.blue })
+hl("LazyReasonRuntime", { fg = colors.teal })
+hl("LazyReasonSource", { fg = colors.orange })
+hl("LazyReasonStart", { fg = colors.green })
+hl("LazySpecial", { fg = colors.cyan })
+hl("LazyTaskOutput", { fg = colors.fg2 })
+hl("LazyUrl", { fg = colors.cyan, underline = true })
+hl("LazyValue", { fg = colors.orange })
+hl("LazyWarning", { fg = colors.yellow })
 
 -- Snacks.nvim highlights
 -- Picker (Telescope-like interface)
@@ -598,9 +696,9 @@ hl("SnacksDashboardIcon", { fg = colors.blue, bg = transparent_bg(colors.bg0) })
 hl("SnacksDashboardFooter", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 
 -- Win (floating windows)
-hl("SnacksWinNormal", { fg = colors.fg2, bg = colors.bg2 })
-hl("SnacksWinBorder", { fg = colors.border, bg = colors.bg2 })
-hl("SnacksWinTitle", { fg = colors.cyan, bg = colors.bg2, bold = true })
+hl("SnacksWinNormal", { fg = colors.fg2, bg = colors.bg1 })
+hl("SnacksWinBorder", { fg = colors.border, bg = colors.bg1 })
+hl("SnacksWinTitle", { fg = colors.cyan, bg = colors.bg1, bold = true })
 
 -- Debug
 hl("SnacksDebugNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
@@ -617,13 +715,13 @@ hl("SnacksDimNormal", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 hl("SnacksDimBuffer", { fg = colors.fg3, bg = transparent_bg(colors.bg0) })
 
 -- Words (word navigation)
-hl("SnacksWordsMatch", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, underline = true })
-hl("SnacksWordsCurrent", { fg = colors.orange, bg = colors.orange, blend = 80, underline = true })
+hl("SnacksWordsMatch", { fg = colors.cyan, underline = true })
+hl("SnacksWordsCurrent", { fg = colors.orange, underline = true })
 
 -- Common snack components
 hl("SnacksNormal", { fg = colors.fg2, bg = transparent_bg(colors.bg0) })
 hl("SnacksBorder", { fg = colors.border, bg = transparent_bg(colors.bg0) })
-hl("SnacksFloatBorder", { fg = colors.border, bg = colors.bg2 })
+hl("SnacksFloatBorder", { fg = colors.border, bg = colors.bg1 })
 hl("SnacksTitle", { fg = colors.cyan, bg = transparent_bg(colors.bg0), bold = true })
 hl("SnacksIcon", { fg = colors.cyan, bg = transparent_bg(colors.bg0) })
 hl("SnacksKey", { fg = colors.cyan, bg = transparent_bg(colors.bg0) })
