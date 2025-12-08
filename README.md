@@ -124,6 +124,38 @@ The Ghostty theme includes:
 - Cursor and selection colors
 - All colors synchronized with the Neovim theme
 
+## JetBrains IDE Theme
+
+A matching JetBrains IDE theme is included in the `jetbrains/` directory. It provides both a UI theme (Island-style) and an editor color scheme.
+
+![Yukinord JetBrains Preview](assets/image3.png)
+
+### Installation
+
+1. In your JetBrains IDE (GoLand, IntelliJ, etc.):
+   - Go to **Settings → Plugins → ⚙️ → Install Plugin from Disk**
+   - Select `jetbrains/yukinord-theme.jar`
+   - Restart the IDE
+
+2. Apply the theme:
+   - Go to **Settings → Appearance & Behavior → Appearance**
+   - Select "Yukinord" from the Theme dropdown
+
+The JetBrains theme includes:
+- Island-style UI with floating panels
+- Editor color scheme matching the Neovim theme
+- Syntax highlighting for all supported languages
+- Git/VCS status colors
+- Consistent colors across all IDE components
+
+### Installing Only the Color Scheme
+
+If you want to use the editor color scheme without the UI theme:
+
+1. Go to **Settings → Editor → Color Scheme → ⚙️ → Import Scheme**
+2. Select `jetbrains/Yukinord.icls`
+3. The color scheme will be available as "Yukinord" in the Color Scheme dropdown
+
 ## Requirements
 
 - Neovim 0.5+ (for Lua support)

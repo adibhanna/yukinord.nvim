@@ -1,0 +1,18 @@
+<idea-plugin>
+    <id>com.yukinord.theme</id>
+    <name>Yukinord Theme</name>
+    <version>1.0.0</version>
+    <vendor>Adib Hanna</vendor>
+    <description><![CDATA[
+        A dark theme based on Nord colors with custom adjustments.
+        Includes both UI theme and editor color scheme.
+    ]]></description>
+
+    <idea-version since-build="232"/>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <themeProvider id="com.yukinord.theme" path="/Yukinord.theme.json"/>
+    </extensions>
+</idea-plugin>
