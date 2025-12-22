@@ -2,8 +2,8 @@
 -- Based on the VSCode theme inspired by Nord and Nord Deep
 ---@diagnostic disable: undefined-global
 
--- Load configuration
-local config = require("yukinord").config
+-- Load configuration (prefer vim.g for persistence across reloads)
+local config = vim.g.yukinord_config or require("yukinord").config
 
 -- Transparent background helper
 local function transparent_bg(color)
