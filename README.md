@@ -62,6 +62,7 @@ Yukinord supports optional configuration via the `setup` function. Call it **bef
 
 ```lua
 require("yukinord").setup({
+  style = "dark",              -- Theme style: "dark" or "light"
   transparent = false,         -- Enable transparent background
   transparent_sidebar = false, -- Enable transparent background for sidebars (NvimTree, terminal, etc.)
 })
@@ -73,13 +74,29 @@ vim.cmd([[colorscheme yukinord]])
 
 | Option | Default | Description |
 |--------|---------|-------------|
+| `style` | `"dark"` | Theme variant: `"dark"` for dark background, `"light"` for light background |
 | `transparent` | `false` | Makes the main editor background transparent |
 | `transparent_sidebar` | `false` | Makes sidebar backgrounds transparent (NvimTree, Snacks terminal, etc.) |
 
 **Note:** When `transparent` is enabled, `transparent_sidebar` is also automatically enabled.
 
+### Light Theme
+
+To use the light variant:
+
+```lua
+require("yukinord").setup({
+  style = "light",
+})
+
+vim.cmd([[colorscheme yukinord]])
+```
+
+The light theme uses Nord's Snow Storm colors for backgrounds with adjusted accent colors for optimal readability.
+
 ## Features
 
+- Dark and light theme variants
 - Transparent background support (configurable)
 - Full support for Treesitter syntax highlighting
 - LSP semantic tokens support
@@ -100,7 +117,8 @@ vim.cmd([[colorscheme yukinord]])
 
 ## Color Palette
 
-- **Background**: `#1C212A` (main), `#14171d` (panels)
+### Dark Theme
+- **Background**: `#1D2129` (main), `#14171d` (panels)
 - **Foreground**: `#d8dee9` (default), `#eceff4` (active)
 - **Cyan**: `#88c0d0` (keywords, accents)
 - **Blue**: `#81a1c1` (info, links)
@@ -109,6 +127,17 @@ vim.cmd([[colorscheme yukinord]])
 - **Orange**: `#d08770` (strings)
 - **Red**: `#bf616a` (errors)
 - **Purple**: `#b48ead` (control keywords)
+
+### Light Theme
+- **Background**: `#ECEFF4` (main), `#E5E9F0` (panels)
+- **Foreground**: `#434C5E` (default), `#2E3440` (active)
+- **Cyan**: `#0B7285` (keywords, accents)
+- **Blue**: `#4A6F9A` (info, links)
+- **Green**: `#4C8B2F` (types, classes)
+- **Yellow**: `#BF8C00` (numbers, functions, warnings)
+- **Orange**: `#C35A1E` (strings)
+- **Red**: `#BF3B4A` (errors)
+- **Purple**: `#8A5DAB` (control keywords)
 
 ## Ghostty Terminal Theme
 

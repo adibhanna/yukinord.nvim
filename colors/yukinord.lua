@@ -20,8 +20,8 @@ local function transparent_sidebar_bg(color)
   return color
 end
 
--- Color palette
-local colors = {
+-- Dark color palette
+local colors_dark = {
   -- Base colors
   bg0 = "#1D2129", -- editor.background (matching buffer and explorer)
   bg1 = "#14171d", -- panel.background, terminal.background
@@ -64,7 +64,77 @@ local colors = {
   diff_text_bg = "#3d4a5c",     -- slightly brighter for changed text within line
   diff_add_char = "#3d4f35",    -- deeper green for inserted characters
   diff_delete_char = "#4d3538", -- deeper red for deleted characters
+
+  -- Visual selection
+  visual = "#445B77",
+
+  -- Cursor line
+  cursorline = "#252b35",
+
+  -- Cursor
+  cursor_fg = "#1D2129",
+  cursor_bg = "#eceff4",
 }
+
+-- Light color palette
+local colors_light = {
+  -- Base colors (inverted - light backgrounds)
+  bg0 = "#ECEFF4", -- editor.background (snow storm 3)
+  bg1 = "#E5E9F0", -- panel.background, terminal.background (snow storm 2)
+  bg2 = "#D8DEE9", -- dropdown.background (snow storm 1)
+  bg3 = "#CDD4E0", -- commandCenter.activeBackground
+  bg4 = "#B8C4D4", -- editor.lineHighlightBorder
+  bg5 = "#A5B1C5", -- button.secondaryBackground
+
+  -- Custom colors
+  statusbar_bg = "#D8DEE9", -- mini.nvim statusline background
+
+  -- Foreground colors (inverted - dark foregrounds)
+  fg0 = "#2E3440", -- editorCursor.foreground, active foreground (polar night 1)
+  fg1 = "#3B4252", -- terminal.ansiWhite (polar night 2)
+  fg2 = "#434C5E", -- editor.foreground, default foreground (polar night 3)
+  fg3 = "#667084", -- comments color
+  fg4 = "#7B8394", -- editorLineNumber.foreground
+
+  -- Border colors
+  border = "#C5CDD9", -- activityBar.border, editorGroup.border
+
+  -- Accent colors (adjusted for light background visibility)
+  cyan = "#0B7285",        -- keywords (deeper for contrast)
+  blue = "#4A6F9A",        -- info (deeper)
+  blue_bright = "#5E81AC", -- selection background
+  green = "#4C8B2F",       -- types, classes (deeper)
+  yellow = "#BF8C00",      -- numbers, functions, warnings (deeper)
+  orange = "#C35A1E",      -- strings (deeper)
+  red = "#BF3B4A",         -- errors (deeper)
+  purple = "#8A5DAB",      -- keyword.control (deeper)
+  teal = "#2E8B8B",        -- debugConsole.sourceForeground (deeper)
+
+  -- Special colors
+  gold = "#D4A500", -- editorLightBulb.foreground (adjusted for light bg)
+
+  -- Diff colors (subtle, light-theme backgrounds)
+  diff_add_bg = "#D5E8D4",      -- subtle green-tinted background for added lines
+  diff_delete_bg = "#F5D5D5",   -- subtle red-tinted background for deleted lines
+  diff_change_bg = "#D5E1F0",   -- subtle blue-tinted background for changed lines
+  diff_text_bg = "#B8D0F0",     -- slightly brighter for changed text within line
+  diff_add_char = "#B8D9B0",    -- deeper green for inserted characters
+  diff_delete_char = "#F0B8B8", -- deeper red for deleted characters
+
+  -- Visual selection
+  visual = "#B4C8E0",
+
+  -- Cursor line
+  cursorline = "#DFE5ED",
+
+  -- Cursor (high contrast for visibility)
+  cursor_fg = "#FFFFFF",
+  cursor_bg = "#000000",
+}
+
+-- Select color palette based on style
+local style = config.style or "dark"
+local colors = (style == "light") and colors_light or colors_dark
 
 -- Helper function to set highlight groups
 local function hl(group, opts)
@@ -79,7 +149,7 @@ end
 
 -- Set background and foreground
 vim.g.colors_name = "yukinord"
-vim.o.background = "dark"
+vim.o.background = style
 vim.o.termguicolors = true
 
 -- Base highlights
@@ -91,12 +161,12 @@ hl("WinSeparator", { fg = colors.border })
 hl("FloatBorder", { fg = colors.statusbar_bg, bg = colors.statusbar_bg })
 
 -- Cursor
-hl("Cursor", { fg = colors.bg0, bg = colors.fg0 })
-hl("CursorLine", { bg = transparent_bg(colors.bg0) })
-hl("CursorLineNr", { fg = colors.fg0, bg = transparent_bg(colors.bg0), bold = true })
-hl("CursorColumn", { bg = transparent_bg(colors.bg0) })
-hl("TermCursor", { fg = colors.bg0, bg = colors.fg0 })
-hl("TermCursorNC", { fg = colors.bg0, bg = colors.fg2 })
+hl("Cursor", { fg = colors.cursor_fg, bg = colors.cursor_bg })
+hl("CursorLine", { bg = transparent_bg(colors.cursorline) })
+hl("CursorLineNr", { fg = colors.fg0, bg = transparent_bg(colors.cursorline), bold = true })
+hl("CursorColumn", { bg = transparent_bg(colors.cursorline) })
+hl("TermCursor", { fg = colors.cursor_fg, bg = colors.cursor_bg })
+hl("TermCursorNC", { fg = colors.cursor_fg, bg = colors.fg2 })
 
 -- Line numbers
 hl("LineNr", { fg = colors.fg4 })
@@ -128,10 +198,10 @@ hl("Search", { fg = colors.bg0, bg = colors.orange, blend = 80 })
 hl("IncSearch", { fg = colors.bg0, bg = colors.yellow, blend = 80 })
 hl("CurSearch", { fg = colors.bg0, bg = colors.orange, blend = 80 })
 
--- Visual selection (VSCode: #445B77)
-hl("Visual", { bg = "#445B77" })
-hl("VisualNOS", { bg = "#445B77", blend = 20 })
-hl("VisualInDiff", { bg = "#445B77" })
+-- Visual selection
+hl("Visual", { bg = colors.visual })
+hl("VisualNOS", { bg = colors.visual, blend = 20 })
+hl("VisualInDiff", { bg = colors.visual })
 
 -- Messages
 hl("ErrorMsg", { fg = colors.red, bold = true })

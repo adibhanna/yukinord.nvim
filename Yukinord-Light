@@ -1,0 +1,32 @@
+# Yukinord Light - Ghostty Theme
+# Light variant of Yukinord for use with the light Neovim colorscheme
+
+# 16-color palette (all colors readable on light background)
+palette = 0=#2E3440
+palette = 1=#BF3B4A
+palette = 2=#4C8B2F
+palette = 3=#BF8C00
+palette = 4=#4A6F9A
+palette = 5=#8A5DAB
+palette = 6=#0B7285
+palette = 7=#4C566A
+palette = 8=#434C5E
+palette = 9=#D93648
+palette = 10=#5C9E38
+palette = 11=#D9A000
+palette = 12=#5A82B0
+palette = 13=#9E6BC0
+palette = 14=#0D8A9E
+palette = 15=#3B4252
+
+# Background and foreground
+background = #ECEFF4
+foreground = #434C5E
+
+# Cursor colors (dark gray for softer appearance)
+cursor-color = #2E3440
+cursor-text = #ECEFF4
+
+# Selection colors
+selection-background = #B4C8E0
+selection-foreground = #2E3440

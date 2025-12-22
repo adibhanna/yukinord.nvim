@@ -5,6 +5,7 @@ local M = {}
 
 -- Default configuration
 M.config = {
+  style = "dark", -- Theme style: "dark" or "light"
   transparent = false, -- Enable transparent background
   transparent_sidebar = false, -- Enable transparent background for sidebars (NvimTree, etc.)
 }
